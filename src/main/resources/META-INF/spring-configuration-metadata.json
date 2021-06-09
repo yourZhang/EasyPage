@@ -1,0 +1,27 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.easy.page.config.EasyPageConfig",
+      "name": "easypage",
+      "type": "com.easy.page.config.EasyPageConfig"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "com.easy.page.config.EasyPageConfig",
+      "name": "easypage.config-map",
+      "type": "java.util.Map<java.lang.String,java.lang.String>"
+    },
+    {
+      "sourceType": "com.easy.page.config.EasyPageConfig",
+      "name": "easypage.dialect",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "com.easy.page.config.EasyPageConfig",
+      "name": "easypage.page-sql-id",
+      "type": "java.lang.String"
+    }
+  ]
+}
