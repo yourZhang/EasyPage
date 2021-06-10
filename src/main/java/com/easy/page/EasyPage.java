@@ -123,7 +123,7 @@ public class EasyPage implements Interceptor {
      * @return
      */
     private String generatePageSql(String sql, Page page) {
-        if (page != null && !!StringUtils.isEmpty(sql)) {
+        if (page != null && !StringUtils.isEmpty(sql)) {
             StringBuffer pageSql = new StringBuffer();
             if ("mysql".equals(pageConfigMap.get(EasyPageConfig.dialect_Property))) {
                 pageSql.append(sql);
