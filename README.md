@@ -45,6 +45,18 @@ List<User> getUserListPage(User user);
 
 只有在Mapper中写成这种格式才能生命要使用EasyPage分页，反之不添加ListPage的查询就不使用。
 
+比如，这种不使用分页的写法就明白了吧
+
+```java
+//查询所有用户 mapper.java
+List<User> getUser(User user);
+
+//mapper.xml
+<select id="getUser" resultType="User">
+   select * from user
+</select>
+```
+
 我们也可以写成这样
 
 ```java
