@@ -144,6 +144,8 @@ public interface UserMapper {
 
 ### 总结 
 
+是不是感觉上手很配置都麻烦，还不如PH呢，但是我取的名字又叫Easy，就是因为逻辑比PH少吧。懒还是🤫
+
 PH返回一个 **Page<T>**，但是源码里是拦截了 **Executor.class**，马上吃饭了明天见...不能耽误下班🤣。
 
 打开 **Page<T>** 类可以发现继承了 **List** 类，大家常用的 **getResult**方法也只是 **return this**。
