@@ -16,35 +16,25 @@ import java.util.Map;
 )
 public class EasyPageConfig {
 
-//    private String dialect; //数据库方言，不同的数据库有不同的分页方法
-//    private String pageSqlId; //mapper.xml中需要拦截的ID(正则匹配)
+    private String dialect = "mysql"; //数据库方言，不同的数据库有不同的分页方法
+    private String pageSqlId = ".*ListPage.*"; //mapper.xml中需要拦截的ID(正则匹配)
 
-    public static String dialect_Property = "dialect";
-    public static String pageSqlId_Property = "pageSqlId";
-
-    private Map<String, String> configMap = new HashMap<String, String>();
+    public EasyPageConfig() {
+    }
 
     public String getDialect() {
-        return this.configMap.get(dialect_Property);
+        return this.dialect;
     }
 
     public void setDialect(String dialect) {
-        this.configMap.put(dialect_Property, dialect);
+        this.dialect = dialect;
     }
 
     public String getPageSqlId() {
-        return this.configMap.get(pageSqlId_Property);
+        return this.pageSqlId;
     }
 
     public void setPageSqlId(String pageSqlId) {
-        this.configMap.put(pageSqlId_Property, pageSqlId);
-    }
-
-    public Map<String, String> getConfigMap() {
-        return configMap;
-    }
-
-    public void setConfigMap(Map<String, String> configMap) {
-        this.configMap = configMap;
+        this.pageSqlId = pageSqlId;
     }
 }

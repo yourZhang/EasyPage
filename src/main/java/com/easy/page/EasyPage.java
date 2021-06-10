@@ -20,6 +20,7 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.springframework.util.StringUtils;
+
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -40,10 +41,10 @@ import java.util.Properties;
 })
 public class EasyPage implements Interceptor {
 
-    private Map<String, String> pageConfigMap;
+    private EasyPageConfig e;
 
-    public EasyPage(Map<String, String> pageConfigMap) {
-        this.pageConfigMap = pageConfigMap;
+    public EasyPage(EasyPageConfig e) {
+        this.e = e;
     }
 
     @Override
@@ -55,7 +56,7 @@ public class EasyPage implements Interceptor {
             BaseStatementHandler delegate = (BaseStatementHandler) ReflectHelper.getValueByFieldName(statementHandler, "delegate");
             //通过反射获取delegate父类BaseStatementHandler的mappedStatement属性
             MappedStatement mappedStatement = (MappedStatement) ReflectHelper.getValueByFieldName(delegate, "mappedStatement");
-            if (mappedStatement.getId().matches(pageConfigMap.get(EasyPageConfig.pageSqlId_Property))) { //拦截需要分页的SQL
+            if (mappedStatement.getId().matches(e.getPageSqlId())) { //拦截需要分页的SQL
                 //获取到当前StatementHandler的 boundSql，这里不管是调用handler.getBoundSql()还是直接调用delegate.getBoundSql()结果是一样的
                 BoundSql boundSql = delegate.getBoundSql();
                 //拿到当前绑定Sql的参数对象，就是我们在调用对应的Mapper映射语句时所传入的参数对象
@@ -125,10 +126,10 @@ public class EasyPage implements Interceptor {
     private String generatePageSql(String sql, Page page) {
         if (page != null && !StringUtils.isEmpty(sql)) {
             StringBuffer pageSql = new StringBuffer();
-            if ("mysql".equals(pageConfigMap.get(EasyPageConfig.dialect_Property))) {
+            if ("mysql".equals(e.getDialect())) {
                 pageSql.append(sql);
                 pageSql.append(" limit " + page.getCurrentResult() + "," + page.getShowCount());
-            } else if ("oracle".equals(pageConfigMap.get(EasyPageConfig.dialect_Property))) {
+            } else if ("oracle".equals(e.getDialect())) {
                 pageSql.append("select * from (select tmp_tb.*,ROWNUM row_id from (");
                 pageSql.append(sql);
                 //pageSql.append(") as tmp_tb where ROWNUM<=");

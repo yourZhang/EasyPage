@@ -37,7 +37,7 @@ public class EasyPageAutoConfiguration {
     @PostConstruct
     public void addEasyPageInterceptor() {
         Iterator var3 = this.sqlSessionFactoryList.iterator();
-        EasyPage e = new EasyPage(easyPageConfig.getConfigMap());
+        EasyPage e = new EasyPage(easyPageConfig);
         while (var3.hasNext()) {
             SqlSessionFactory sqlSessionFactory = (SqlSessionFactory) var3.next();
             sqlSessionFactory.getConfiguration().addInterceptor(e);
